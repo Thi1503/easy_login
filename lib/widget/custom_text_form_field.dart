@@ -7,26 +7,20 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller; // Controller quản lý giá trị
   final String hintText; // Placeholder khi chưa nhập
   final bool isError; // Cờ hiển thị error message
-  final String errorMessage; // Nội dung lỗi
   final bool obscureText; // Ẩn ký tự (mật khẩu)
   final Widget? suffixIcon; // Icon hiển thị cuối ô
   final FormFieldValidator<String>? validator; // Hàm validate
-  final ValueChanged<String>? onChanged; // Callback khi giá trị thay đổi
-  final FormFieldSetter<String>? onSaved; // Callback khi lưu form
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.label,
     required this.controller,
     required this.hintText,
     this.isError = false,
-    this.errorMessage = '',
     this.obscureText = false,
     this.suffixIcon,
     this.validator,
-    this.onChanged,
-    this.onSaved,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,28 +57,8 @@ class CustomTextFormField extends StatelessWidget {
                 suffixIcon: suffixIcon,
               ),
               validator: validator,
-              onChanged: onChanged,
-              onSaved: onSaved,
             ),
           ),
-          if (isError) // Hiển thị text lỗi khi cờ isError = true
-            Flexible(
-              flex: 1,
-              child: Padding(
-                padding: EdgeInsets.only(top: 4.h),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    errorMessage,
-                    style: TextStyle(
-                      color: Color(0xFFFF0000),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12.sp,
-                    ),
-                  ),
-                ),
-              ),
-            ),
         ],
       ),
     );
